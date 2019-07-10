@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.fooddelivery.aac.ViewModelFactory
 import com.app.fooddelivery.di.key.ViewModelKey
 import com.app.fooddelivery.view.activity.MainActivityViewModel
+import com.app.fooddelivery.view.fragment.delivery.DeliveryDetailsViewModel
 import com.app.fooddelivery.view.fragment.delivery.DeliveryListViewModel
 import dagger.Binds
 import dagger.Module
@@ -28,6 +29,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(DeliveryListViewModel::class)
     fun bindDeliveryListViewModel(deliveryListViewModel: DeliveryListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DeliveryDetailsViewModel::class)
+    fun bindDeliveryDetailsViewModel(deliveryDetailsViewModel: DeliveryDetailsViewModel): ViewModel
 
     @Binds
     fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory

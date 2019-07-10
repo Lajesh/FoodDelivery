@@ -15,6 +15,8 @@ import com.app.fooddelivery.di.Injectable
 import com.app.fooddelivery.view.activity.base.BaseActivity
 import com.app.fooddelivery.view.listeners.BackButtonHandlerListener
 import com.app.fooddelivery.view.listeners.BackPressListener
+import com.app.fooddelivery.viewmodel.BaseViewModel
+import com.app.fooddelivery.viewmodel.SharedViewModel
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -36,7 +38,7 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
     protected var isUseCustomeViewModelFactory: Boolean = true
 
 
-    //protected lateinit var sharedViewModel: SharedViewModel
+    protected lateinit var sharedViewModel: SharedViewModel
 
     private var backButtonHandler: BackButtonHandlerListener? = null
 
@@ -58,7 +60,7 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
             ViewModelProviders.of(this).get(getViewModel())
         }
 
-       // sharedViewModel = ViewModelProviders.of(activity!!).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProviders.of(activity!!).get(SharedViewModel::class.java)
 
     }
 
@@ -78,7 +80,7 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
         super.onActivityCreated(savedInstanceState)
         setTitle()
 
-        //setSharedViewModel()
+        setSharedViewModel()
 
         observeResponse()
 
@@ -110,9 +112,9 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
     /**
      * Method which sets the sharedview to baseviewmodel
      */
-//    private fun setSharedViewModel() {
-//        (viewModel as BaseViewModel<*>).sharedViewModel = sharedViewModel
-//    }
+    private fun setSharedViewModel() {
+        (viewModel as BaseViewModel).sharedViewModel = sharedViewModel
+    }
 
     /**
      * Method to override the backpress behaviour on indivitual fragment

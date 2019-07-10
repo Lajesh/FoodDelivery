@@ -81,6 +81,7 @@ abstract class BaseActivity<V : ViewModel, D : ViewDataBinding> : AppCompatActiv
      */
     fun setTitle(title: String) {
         (viewModel as BaseViewModel).setTitle(title)
+        actionBar?.title = title
     }
 
     /**

@@ -32,7 +32,7 @@ abstract class BaseViewModel : ViewModel(), Observable {
     private val callbacks = PropertyChangeRegistry()
 
 
-    //lateinit var sharedViewModel: SharedViewModel
+    lateinit var sharedViewModel: SharedViewModel
 
     fun showStepper() {
         headerStepperStatus.value = true

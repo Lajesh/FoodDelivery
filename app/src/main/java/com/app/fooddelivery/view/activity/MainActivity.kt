@@ -22,7 +22,8 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         isUseCustomeViewModelFactory = false
         super.onCreate(savedInstanceState)
 
-        FragmentUtils.replaceFragment(this, DeliveryListFragment(), R.id.fragmentContainer, false, FragmentUtils.FragmentAnimation.TRANSITION_NONE)
+        FragmentUtils.replaceFragment(this, DeliveryListFragment(), R.id.fragmentContainer,
+            false, FragmentUtils.FragmentAnimation.TRANSITION_NONE)
     }
 
 }
