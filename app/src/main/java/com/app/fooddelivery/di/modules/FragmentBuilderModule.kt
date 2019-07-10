@@ -1,6 +1,6 @@
 package com.app.fooddelivery.di.modules
 
-import com.app.fooddelivery.view.fragment.login.LoginFragment
+import com.app.fooddelivery.view.fragment.base.DeliveryListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -14,5 +14,5 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
-    abstract fun contributeLoginFragment(): LoginFragment
+    abstract fun contributeDeliveryListFragment(): DeliveryListFragment
 }

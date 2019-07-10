@@ -2,6 +2,7 @@ package com.app.fooddelivery.repository
 
 import com.app.fooddelivery.data.remote.Api
 import com.app.fooddelivery.data.remote.response.ResponseListener
+import com.app.fooddelivery.model.DeliveryResponse
 import com.app.fooddelivery.schedulers.SchedulerContract
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ class DeliveryOrderRepository@Inject constructor(private val api: Api, scheduler
      * @param bodyParams: Json Body
      * @param responseListener: Response Listener Callback
      */
-    fun getDeliveries(offset: Int, limit: Int,  responseListener: ResponseListener<User>) {
+    fun getDeliveries(offset: Int, limit: Int,  responseListener: ResponseListener<List<DeliveryResponse>>) {
         performRequest(api.getDeliveries(offset, limit), responseListener)
     }
 

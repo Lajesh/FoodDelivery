@@ -1,15 +1,14 @@
 package com.app.fooddelivery.view.activity.base
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.app.fooddelivery.view.listeners.BackButtonHandlerListener
 import com.app.fooddelivery.view.listeners.BackPressListener
 import com.app.fooddelivery.viewmodel.BaseViewModel
@@ -34,9 +33,11 @@ abstract class BaseActivity<V : ViewModel, D : ViewDataBinding> : AppCompatActiv
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
 
     private val backClickListenersList = ArrayList<WeakReference<BackPressListener>>()
+
+    protected var isUseCustomeViewModelFactory: Boolean = true
 
     protected lateinit var viewModel: V
 
@@ -53,9 +54,13 @@ abstract class BaseActivity<V : ViewModel, D : ViewDataBinding> : AppCompatActiv
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataBinding = DataBindingUtil.setContentView(this, layoutRes)
-        dataBinding.setLifecycleOwner(this)
+        dataBinding.lifecycleOwner = this
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
+        viewModel = if (isUseCustomeViewModelFactory) {
+            ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
+        } else {
+            ViewModelProviders.of(this).get(getViewModel())
+        }
         dataBinding.setVariable(bindingVariable, viewModel)
         dataBinding.executePendingBindings()
 
@@ -66,7 +71,7 @@ abstract class BaseActivity<V : ViewModel, D : ViewDataBinding> : AppCompatActiv
      * Method which listens to back button press in toolbar
      */
     private fun observeBackPressAction() {
-        (viewModel as BaseViewModel<*>).backPressAction.observe(this, Observer {
+        (viewModel as BaseViewModel).backPressAction.observe(this, Observer {
             onBackPressed()
         })
     }
@@ -75,7 +80,7 @@ abstract class BaseActivity<V : ViewModel, D : ViewDataBinding> : AppCompatActiv
      * Method which sets the title in the header
      */
     fun setTitle(title: String) {
-        (viewModel as BaseViewModel<*>).setTitle(title)
+        (viewModel as BaseViewModel).setTitle(title)
     }
 
     /**

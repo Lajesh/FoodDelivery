@@ -1,17 +1,16 @@
 package com.app.fooddelivery.view.fragment.base
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.app.fooddelivery.di.Injectable
 import com.app.fooddelivery.view.activity.base.BaseActivity
 import com.app.fooddelivery.view.listeners.BackButtonHandlerListener
@@ -25,7 +24,7 @@ import javax.inject.Inject
  * Created on: 2019-07-05
  * Modified on: 2019-07-05
  *****/
-abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : Fragment(), Injectable, BackPressListener {
+abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragment.app.Fragment(), Injectable, BackPressListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -33,6 +32,9 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : Fragment(), In
     protected lateinit var viewModel: V
 
     protected lateinit var dataBinding: D
+
+    protected var isUseCustomeViewModelFactory: Boolean = true
+
 
     //protected lateinit var sharedViewModel: SharedViewModel
 
@@ -50,7 +52,11 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : Fragment(), In
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
+        viewModel = if (isUseCustomeViewModelFactory) {
+            ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
+        } else {
+            ViewModelProviders.of(this).get(getViewModel())
+        }
 
        // sharedViewModel = ViewModelProviders.of(activity!!).get(SharedViewModel::class.java)
 

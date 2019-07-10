@@ -1,10 +1,11 @@
 package com.app.fooddelivery.di.modules
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.app.fooddelivery.aac.ViewModelFactory
 import com.app.fooddelivery.di.key.ViewModelKey
-import com.app.fooddelivery.view.fragment.login.LoginViewModel
+import com.app.fooddelivery.view.activity.MainActivityViewModel
+import com.app.fooddelivery.view.fragment.delivery.DeliveryListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -20,8 +21,13 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(LoginViewModel::class)
-    fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+    @ViewModelKey(MainActivityViewModel::class)
+    fun bindMainActivityViewModel(mainActivityViewModel: MainActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DeliveryListViewModel::class)
+    fun bindDeliveryListViewModel(deliveryListViewModel: DeliveryListViewModel): ViewModel
 
     @Binds
     fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
