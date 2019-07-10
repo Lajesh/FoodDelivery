@@ -13,11 +13,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp">
 
-        <androidx.cardview.widget.CardView android:layout_width="match_parent"
+        <RelativeLayout android:layout_width="match_parent"
                                            android:layout_height="wrap_content"
-                                           android:background="@color/colorPrimaryDark"
-                                           card_view:cardCornerRadius="4dp"
-                                           android:elevation="6dp"
+                                           android:background="?selectableItemBackground"
                                            android:onClick="@{() -> listener.onItemClick(data)}">
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -55,7 +53,7 @@
 
             </RelativeLayout>
 
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
 
     </RelativeLayout>
