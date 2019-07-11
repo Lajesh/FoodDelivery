@@ -7,12 +7,12 @@
 
 
 
-The application has been built with **offline support**. It has been designed using **Android Architecture components** with **Room** for offline data caching. 
+The application has been built with **offline support**. It has been designed using **Android Architecture components** with **Retrofit** for offline data caching. 
 
 The whole application is built based on the MVVM architectural pattern.
 
 # Application Architecture
-![alt text](https://cdn-images-1.medium.com/max/1600/1*OqeNRtyjgWZzeUifrQT-NA.png)
+<img src="/screenshots/arch.png" width="346" height="615" alt="Home"/> 
 
 The main advatage of using MVVM, there is no two way dependency between ViewModel and Model unlike MVP. Here the view can observe the datachanges in the viewmodel as we are using LiveData which is lifecycle aware. The viewmodel to view communication is achieved through observer pattern (basically observing the state changes of the data in the viewmodel).
 
