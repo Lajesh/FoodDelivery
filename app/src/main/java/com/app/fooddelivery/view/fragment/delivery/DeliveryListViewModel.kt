@@ -2,6 +2,7 @@ package com.app.fooddelivery.view.fragment.delivery
 
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
+import androidx.lifecycle.MutableLiveData
 import com.app.fooddelivery.BR
 import com.app.fooddelivery.R
 import com.app.fooddelivery.aac.SingleLiveEvent
@@ -27,10 +28,12 @@ class DeliveryListViewModel @Inject constructor(private val deliveryOrderReposit
 
     val deliveryItems: ObservableList<DeliveryResponse> = ObservableArrayList()
     val itemClickEvent: SingleLiveEvent<Void> = SingleLiveEvent()
+    var shouldHideRefresh = MutableLiveData<Boolean>()
+
     var offset: Int = 0
 
     val itemBinding: ItemBinding<DeliveryResponse> =
-        ItemBinding.of<DeliveryResponse>(com.app.fooddelivery.BR.data, R.layout.item_delivery)
+        ItemBinding.of<DeliveryResponse>(BR.data, R.layout.item_delivery)
             .bindExtra(BR.listener, object : OnItemClickListener {
                 override fun onItemClick(item: DeliveryResponse) {
                     sharedViewModel.deliveryDetails.value = item
@@ -39,6 +42,10 @@ class DeliveryListViewModel @Inject constructor(private val deliveryOrderReposit
             })
 
     init {
+        getDeliveryList(offset = 0)
+    }
+
+    fun swipeRefreshEvent() {
         getDeliveryList(offset = 0)
     }
 
@@ -57,6 +64,7 @@ class DeliveryListViewModel @Inject constructor(private val deliveryOrderReposit
             }
 
             override fun onResponse(result: ApiResponse<List<DeliveryResponse>>) {
+                shouldHideRefresh.value = true
                 if (result.status == ResponseStatus.SUCCESS && null != result.data) {
                     deliveryItems.addAll(result.data)
                 } else {

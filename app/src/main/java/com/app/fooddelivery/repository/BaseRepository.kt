@@ -6,7 +6,6 @@ import com.app.fooddelivery.data.remote.response.ResponseStatus
 import com.app.fooddelivery.schedulers.SchedulerContract
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
-import javax.inject.Inject
 
 /****
  * Base repository which is responsible for executing all the REST service calls

@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.app.fooddelivery.FoodDeliveryApp
 import com.app.fooddelivery.R
 import com.app.fooddelivery.di.Injectable
-import com.app.fooddelivery.view.activity.base.BaseActivity
 import com.app.fooddelivery.view.listeners.BackButtonHandlerListener
 import com.app.fooddelivery.view.listeners.BackPressListener
 import com.app.fooddelivery.viewmodel.BaseViewModel
@@ -83,8 +82,6 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setTitle()
-
         setSharedViewModel()
 
         observeResponse()
@@ -97,20 +94,11 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
             }
 
         })
+
+        (viewModel as BaseViewModel).headerTitle.value = getTitle()
     }
 
 
-    /**
-     * Method which sets the title of the view
-     */
-    private fun setTitle() {
-        activity?.let {
-            when (it) {
-                is BaseActivity<*, *> ->
-                    it.setTitle(getTitle())
-            }
-        }
-    }
 
 
     /**

@@ -1,7 +1,7 @@
 package com.app.fooddelivery.di.modules
 
-import com.app.fooddelivery.view.fragment.base.DeliveryListFragment
 import com.app.fooddelivery.view.fragment.delivery.DeliveryDetailsFragment
+import com.app.fooddelivery.view.fragment.delivery.DeliveryListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

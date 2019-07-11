@@ -19,11 +19,7 @@ abstract class BaseViewModel : ViewModel(), Observable {
 
     val backPressAction: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
-    val serviceError: SingleLiveEvent<String> = SingleLiveEvent();
-
-    val headerStatus: MutableLiveData<Boolean> = MutableLiveData()
-
-    val headerStepperStatus: MutableLiveData<Boolean> = MutableLiveData()
+    val serviceError: SingleLiveEvent<String> = SingleLiveEvent()
 
     val headerTitle: MutableLiveData<String> = MutableLiveData()
 
@@ -31,18 +27,6 @@ abstract class BaseViewModel : ViewModel(), Observable {
 
 
     lateinit var sharedViewModel: SharedViewModel
-
-    fun showStepper() {
-        headerStepperStatus.value = true
-    }
-
-    fun showHeader(show: Boolean) {
-        headerStatus.value = show
-    }
-
-    open fun onBackpress() {
-        backPressAction.value = true
-    }
 
 
     fun setTitle(title: String) {

@@ -23,9 +23,9 @@ object FragmentUtils {
 
 
     @IntDef(
-        FragmentAnimation.TRANSITION_POP, FragmentAnimation.TRANSITION_SLIDE_LEFT_RIGHT,
-        FragmentAnimation.TRANSITION_FADE_IN_OUT, FragmentAnimation.TRANSITION_SLIDE_LEFT_RIGHT_WITHOUT_EXIT,
-        FragmentAnimation.TRANSITION_NONE, FragmentAnimation.TRANSITION_PUSH_TO_STACK
+        TRANSITION_POP, TRANSITION_SLIDE_LEFT_RIGHT,
+        TRANSITION_FADE_IN_OUT, TRANSITION_SLIDE_LEFT_RIGHT_WITHOUT_EXIT,
+        TRANSITION_NONE, TRANSITION_PUSH_TO_STACK
     )
     annotation class FragmentAnimation {
         companion object {
@@ -132,25 +132,25 @@ object FragmentUtils {
         val transaction = fragmentManager.beginTransaction()
 
         when (animationType) {
-            FragmentAnimation.TRANSITION_POP -> transaction.setCustomAnimations(
+            TRANSITION_POP -> transaction.setCustomAnimations(
                 R.anim.anim_enter,
                 R.anim.anim_exit,
                 R.anim.anim_pop_enter,
                 R.anim.anim_pop_exit
             )
-            FragmentAnimation.TRANSITION_FADE_IN_OUT -> transaction.setCustomAnimations(
+            TRANSITION_FADE_IN_OUT -> transaction.setCustomAnimations(
                 R.anim.anim_frag_fade_in,
                 R.anim.anim_frag_fade_out
             )
-            FragmentAnimation.TRANSITION_SLIDE_LEFT_RIGHT -> transaction.setCustomAnimations(
+            TRANSITION_SLIDE_LEFT_RIGHT -> transaction.setCustomAnimations(
                 R.anim.slide_in_from_rigth, R.anim.slide_out_to_left,
                 R.anim.slide_in_from_left, R.anim.slide_out_to_right
             )
-            FragmentAnimation.TRANSITION_SLIDE_LEFT_RIGHT_WITHOUT_EXIT -> transaction.setCustomAnimations(
+            TRANSITION_SLIDE_LEFT_RIGHT_WITHOUT_EXIT -> transaction.setCustomAnimations(
                 R.anim.slide_in_from_rigth,
                 0
             )
-            FragmentUtils.FragmentAnimation.TRANSITION_NONE -> transaction.setCustomAnimations(0, 0)
+            TRANSITION_NONE -> transaction.setCustomAnimations(0, 0)
 
         }
 
@@ -189,25 +189,25 @@ object FragmentUtils {
         val fragManager = activity.supportFragmentManager
         val transaction = fragManager.beginTransaction()
         when (animationType) {
-            FragmentAnimation.TRANSITION_POP -> transaction.setCustomAnimations(
+            TRANSITION_POP -> transaction.setCustomAnimations(
                 R.anim.anim_enter,
                 R.anim.anim_exit,
                 R.anim.anim_pop_enter,
                 R.anim.anim_pop_exit
             )
-            FragmentAnimation.TRANSITION_FADE_IN_OUT -> transaction.setCustomAnimations(
+            TRANSITION_FADE_IN_OUT -> transaction.setCustomAnimations(
                 R.anim.anim_frag_fade_in,
                 R.anim.anim_frag_fade_out
             )
-            FragmentAnimation.TRANSITION_SLIDE_LEFT_RIGHT -> transaction.setCustomAnimations(
+            TRANSITION_SLIDE_LEFT_RIGHT -> transaction.setCustomAnimations(
                 R.anim.slide_in_from_rigth, R.anim.slide_out_to_left,
                 R.anim.slide_in_from_left, R.anim.slide_out_to_right
             )
-            FragmentAnimation.TRANSITION_SLIDE_LEFT_RIGHT_WITHOUT_EXIT -> transaction.setCustomAnimations(
+            TRANSITION_SLIDE_LEFT_RIGHT_WITHOUT_EXIT -> transaction.setCustomAnimations(
                 R.anim.slide_in_from_rigth,
                 0
             )
-            FragmentUtils.FragmentAnimation.TRANSITION_NONE -> transaction.setCustomAnimations(0, 0)
+            TRANSITION_NONE -> transaction.setCustomAnimations(0, 0)
         }
         if (addToBackStack)
             transaction.addToBackStack(fragment.javaClass.canonicalName)

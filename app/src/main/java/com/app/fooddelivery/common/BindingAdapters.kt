@@ -1,6 +1,7 @@
 package com.app.fooddelivery.common
 
 import android.widget.ImageView
+import androidx.annotation.ColorRes
 import androidx.databinding.BindingAdapter
 import com.app.fooddelivery.listeners.OnPaginationCallback
 import com.bumptech.glide.Glide
@@ -42,6 +43,28 @@ class BindingAdapters {
             }
 
         }
+
+        @JvmStatic
+        @BindingAdapter("swipeListener", "colorScheme", "hideRefresh", requireAll = false)
+        fun setSwipRefreshListener(
+            view: androidx.swiperefreshlayout.widget.SwipeRefreshLayout,
+            listener: androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener?, @ColorRes color: Int?, refresh: Boolean?
+        ) {
+            refresh?.let {
+                if (it) {
+                    view.isRefreshing = !it
+                }
+            }
+            listener?.let {
+                view.setOnRefreshListener(listener)
+            }
+            color?.let {
+                view.setColorSchemeColors(it)
+            }
+        }
     }
+
+
+
 
 }

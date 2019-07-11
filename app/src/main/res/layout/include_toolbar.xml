@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
 >
     <data>
 
         <variable
                 name="viewModel"
-                type="com.app.fooddelivery.view.fragment.delivery.DeliveryListViewModel"/>
+                type="com.app.fooddelivery.viewmodel.BaseViewModel"/>
 
         <import type="android.view.View"/>
 
     </data>
-    <RelativeLayout
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
-
+            android:layout_height="wrap_content">
         <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:id="@+id/appBar"
@@ -29,7 +28,6 @@
                     android:background="@color/colorPrimary"
                     android:textStyle="bold"
                     android:gravity="center"
-                    android:textSize="20sp"
                     android:textColor="#000000"
                     android:text="@{viewModel.headerTitle}">
 
@@ -43,33 +41,12 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/appBar"
                     android:layout_marginTop="-7dp"
+                    android:background="#FFFFFF"
                     android:layout_marginBottom="-7dp"
                     android:visibility="@{viewModel.loadingStatus ? View.VISIBLE : View.GONE}"
                     android:indeterminate="true"/>
 
         </com.google.android.material.appbar.AppBarLayout>
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeContainer"
-                android:layout_below="@id/appBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:swipeListener="@{()->viewModel.swipeRefreshEvent()}"
-                app:colorScheme="@{@color/orange}"
-                app:hideRefresh="@{viewModel.shouldHideRefresh}">
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvOrderList"
-                    android:layout_below="@id/appBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:items="@{viewModel.deliveryItems}"
-                    app:itemBinding="@{viewModel.itemBinding}"
-                    app:paginationCallback="@{(itemCount,visibleItem)->viewModel.onNextPage(itemCount,visibleItem)}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    </RelativeLayout>
-
+    </LinearLayout>
 </layout>

@@ -1,7 +1,5 @@
 package com.app.fooddelivery.view.listeners
 
-import com.app.fooddelivery.view.listeners.BackPressListener
-
 /****
  * Back button handler interface. Add/remove listener functionality
  * Author: Lajesh Dineshkumar

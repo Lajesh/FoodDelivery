@@ -16,9 +16,9 @@ class DeliveryOrderRepository@Inject constructor(private val api: Api, scheduler
     : BaseRepository(scheduler){
 
     /**
-     * The method for performing the user login
-     * @param authorizationHeader : Access Token
-     * @param bodyParams: Json Body
+     * The method for getting the list of deliveries
+     * @param offset : Page Offset
+     * @param limit: Page Limit
      * @param responseListener: Response Listener Callback
      */
     fun getDeliveries(offset: Int, limit: Int,  responseListener: ResponseListener<List<DeliveryResponse>>) {

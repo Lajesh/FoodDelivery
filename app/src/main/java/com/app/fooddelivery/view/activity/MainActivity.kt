@@ -6,7 +6,7 @@ import com.app.fooddelivery.R
 import com.app.fooddelivery.databinding.ActivityMainBinding
 import com.app.fooddelivery.utils.FragmentUtils
 import com.app.fooddelivery.view.activity.base.BaseActivity
-import com.app.fooddelivery.view.fragment.base.DeliveryListFragment
+import com.app.fooddelivery.view.fragment.delivery.DeliveryListFragment
 
 class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() {
     override val layoutRes: Int
