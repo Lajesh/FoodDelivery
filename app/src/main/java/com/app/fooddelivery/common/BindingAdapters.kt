@@ -1,10 +1,10 @@
 package com.app.fooddelivery.common
 
 import android.widget.ImageView
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.Glide
 import androidx.databinding.BindingAdapter
-
+import com.app.fooddelivery.listeners.OnPaginationCallback
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 
 /*******
@@ -21,6 +21,26 @@ class BindingAdapters {
             Glide.with(view.context)
                 .load(imageUrl).apply(RequestOptions().circleCrop())
                 .into(view)
+        }
+
+        @JvmStatic
+        @BindingAdapter("paginationCallback")
+        fun setSwipRefreshListener(
+            view: androidx.recyclerview.widget.RecyclerView,
+            listener: OnPaginationCallback?
+        ) {
+            listener?.let {
+                view.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+                    override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+                        it.onNextPage(
+                            recyclerView.layoutManager?.itemCount ?: 0,
+                            (recyclerView.layoutManager as androidx.recyclerview.widget.LinearLayoutManager).findLastVisibleItemPosition()
+                        )
+                    }
+                })
+            }
+
         }
     }
 

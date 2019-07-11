@@ -2,13 +2,12 @@ package com.app.fooddelivery.view.fragment.delivery
 
 import android.os.Bundle
 import com.app.fooddelivery.BR
+import com.app.fooddelivery.FoodDeliveryApp
 import com.app.fooddelivery.R
-import com.app.fooddelivery.model.DeliveryResponse
 import com.app.fooddelivery.view.fragment.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_delivery_details.*
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
-import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.MarkerOptions
 
 
@@ -47,7 +46,7 @@ OnMapReadyCallback{
     }
 
     override fun getTitle(): String {
-        return "Delivery Details"
+        return FoodDeliveryApp.applicationContext().getString(R.string.delivery_details)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,4 +59,5 @@ OnMapReadyCallback{
         dataBinding.mapview.onCreate(savedInstanceState)
         dataBinding.mapview.getMapAsync(this)
     }
+
 }

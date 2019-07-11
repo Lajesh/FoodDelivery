@@ -17,11 +17,9 @@ abstract class BaseViewModel : ViewModel(), Observable {
 
     val loadingStatus: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
-    val logoutStatus: SingleLiveEvent<Boolean> = SingleLiveEvent()
-
     val backPressAction: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
-    val logoutAction: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    val serviceError: SingleLiveEvent<String> = SingleLiveEvent();
 
     val headerStatus: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -46,9 +44,6 @@ abstract class BaseViewModel : ViewModel(), Observable {
         backPressAction.value = true
     }
 
-    open fun onLogoutAction() {
-        logoutAction.value = true
-    }
 
     fun setTitle(title: String) {
         headerTitle.value = title

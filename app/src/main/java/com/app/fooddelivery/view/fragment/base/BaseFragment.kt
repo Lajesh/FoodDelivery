@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.app.fooddelivery.FoodDeliveryApp
+import com.app.fooddelivery.R
 import com.app.fooddelivery.di.Injectable
 import com.app.fooddelivery.view.activity.base.BaseActivity
 import com.app.fooddelivery.view.listeners.BackButtonHandlerListener
@@ -66,7 +70,7 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dataBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
-        dataBinding.setLifecycleOwner(this)
+        dataBinding.lifecycleOwner = this
         return dataBinding.root
     }
 
@@ -78,6 +82,7 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         setTitle()
 
         setSharedViewModel()
@@ -85,6 +90,13 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
         observeResponse()
 
         observeLoadingStatus()
+
+        (viewModel as BaseViewModel).serviceError.observe(this, Observer {
+            it?.let {
+                showError(it)
+            }
+
+        })
     }
 
 
@@ -151,6 +163,33 @@ abstract class BaseFragment<V : ViewModel, D : ViewDataBinding> : androidx.fragm
 
     open fun observeLoadingStatus() {
         // Implementation goes on the child fragments
+    }
+
+    private fun showError(message: String){
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+
+        // set message of alert dialog
+        dialogBuilder.setMessage(message)
+            // if the dialog is cancelable
+            .setCancelable(false)
+            // positive button text and action
+            .setPositiveButton(FoodDeliveryApp.applicationContext().getString(R.string.proceed)) { dialog, _ -> dialog.dismiss() }
+
+        // create dialog box
+        val alert = dialogBuilder.create()
+        // set title for alert dialog box
+        alert.setTitle(FoodDeliveryApp.applicationContext().getString(R.string.error))
+        // show alert dialog
+        alert.show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        activity?.let {
+            (viewModel as BaseViewModel).serviceError.removeObservers(it)
+            (viewModel as BaseViewModel).loadingStatus.removeObservers(it)
+            (viewModel as BaseViewModel).backPressAction.removeObservers(it)
+        }
     }
 
 }
