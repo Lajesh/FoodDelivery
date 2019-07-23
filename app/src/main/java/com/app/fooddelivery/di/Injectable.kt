@@ -6,5 +6,4 @@ package com.app.fooddelivery.di
  * Created on: 2019-07-05
  * Modified on: 2019-07-05
  *****/
-interface Injectable {
-}
+interface Injectable

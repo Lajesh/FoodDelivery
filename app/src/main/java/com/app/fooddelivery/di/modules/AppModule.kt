@@ -3,7 +3,7 @@ package com.app.fooddelivery.di.modules
 import com.app.fooddelivery.data.remote.Api
 import com.app.fooddelivery.repository.DeliveryOrderRepository
 import com.app.fooddelivery.schedulers.SchedulerContract
-import com.app.fooddeliveryapp.schedulers.SchedulerProvider
+import com.app.fooddelivery.schedulers.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

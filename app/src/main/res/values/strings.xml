@@ -9,4 +9,9 @@
     <string name="requestTimeOutError">Oooops! We couldn’t capture your request in time. Please try again.</string>
     <string name="errorCodeMalformedJson">MALFORMED_JSON</string>
     <string name="responseMalformedJson">Oops! We hit an error. Try again later.</string>
+
+    <string name="proceed">Proceed</string>
+    <string name="error">Error</string>
+    <string name="delivery_details">Delivery Details</string>
+    <string name="thingstodeliver">Things to Deliver</string>
 </resources>

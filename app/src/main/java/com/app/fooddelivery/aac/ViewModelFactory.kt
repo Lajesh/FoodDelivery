@@ -1,7 +1,7 @@
 package com.app.fooddelivery.aac
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
@@ -12,6 +12,7 @@ import javax.inject.Singleton
  * Created on: 5/7/19
  * Modified on: 5/7/19
  *****/
+@Suppress("UNCHECKED_CAST")
 @Singleton
 class ViewModelFactory
 @Inject constructor(private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>

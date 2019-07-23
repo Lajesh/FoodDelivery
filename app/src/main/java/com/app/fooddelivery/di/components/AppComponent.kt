@@ -4,6 +4,7 @@ import android.app.Application
 import com.app.fooddelivery.FoodDeliveryApp
 import com.app.fooddelivery.di.modules.ActivityBuilderModule
 import com.app.fooddelivery.di.modules.AppModule
+import com.app.fooddelivery.di.modules.FragmentBuilderModule
 import com.app.fooddelivery.di.modules.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
@@ -22,7 +23,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         NetworkModule::class,
-        ActivityBuilderModule::class]
+        ActivityBuilderModule::class,
+        FragmentBuilderModule::class]
 )
 interface AppComponent {
     @Component.Builder

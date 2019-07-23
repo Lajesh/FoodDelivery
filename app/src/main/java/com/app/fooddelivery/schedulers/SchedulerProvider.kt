@@ -1,6 +1,5 @@
-package com.app.fooddeliveryapp.schedulers
+package com.app.fooddelivery.schedulers
 
-import com.app.fooddelivery.schedulers.SchedulerContract
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

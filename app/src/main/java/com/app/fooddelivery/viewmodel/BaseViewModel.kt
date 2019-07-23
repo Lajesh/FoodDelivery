@@ -1,9 +1,10 @@
 package com.app.fooddelivery.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.databinding.Observable
+import androidx.databinding.PropertyChangeRegistry
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.app.fooddelivery.aac.SingleLiveEvent
-import com.app.fooddelivery.data.remote.response.ApiResponse
 
 /****
  * Base view model from which all other viewmodels are inherited
@@ -11,44 +12,55 @@ import com.app.fooddelivery.data.remote.response.ApiResponse
  * Created on: 2019-07-05
  * Modified on: 2019-07-05
  *****/
-abstract class BaseViewModel<T> : ViewModel() {
+abstract class BaseViewModel : ViewModel(), Observable {
 
-    val response: SingleLiveEvent<ApiResponse<T>> = SingleLiveEvent()
 
     val loadingStatus: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
-    val logoutStatus: SingleLiveEvent<Boolean> = SingleLiveEvent()
-
     val backPressAction: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
-    val logoutAction: SingleLiveEvent<Boolean> = SingleLiveEvent()
-
-    val headerStatus: MutableLiveData<Boolean> = MutableLiveData()
-
-    val headerStepperStatus: MutableLiveData<Boolean> = MutableLiveData()
+    val serviceError: SingleLiveEvent<String> = SingleLiveEvent()
 
     val headerTitle: MutableLiveData<String> = MutableLiveData()
 
-    //lateinit var sharedViewModel: SharedViewModel
+    private val callbacks = PropertyChangeRegistry()
 
-    fun showStepper() {
-        headerStepperStatus.value = true
-    }
 
-    fun showHeader(show: Boolean) {
-        headerStatus.value = show
-    }
+    lateinit var sharedViewModel: SharedViewModel
 
-    open fun onBackpress() {
-        backPressAction.value = true
-    }
-
-    open fun onLogoutAction() {
-        logoutAction.value = true
-    }
 
     fun setTitle(title: String) {
         headerTitle.value = title
+    }
+
+    override fun addOnPropertyChangedCallback(
+        callback: Observable.OnPropertyChangedCallback
+    ) {
+        callbacks.add(callback)
+    }
+
+    override fun removeOnPropertyChangedCallback(
+        callback: Observable.OnPropertyChangedCallback
+    ) {
+        callbacks.remove(callback)
+    }
+
+    /**
+     * Notifies observers that all properties of this instance have changed.
+     */
+    internal fun notifyChange() {
+        callbacks.notifyCallbacks(this, 0, null)
+    }
+
+    /**
+     * Notifies observers that a specific property has changed. The getter for the
+     * property that changes should be marked with the @Bindable annotation to
+     * generate a field in the BR class to be used as the fieldId parameter.
+     *
+     * @param fieldId The generated BR id for the Bindable field.
+     */
+    internal fun notifyPropertyChanged(fieldId: Int) {
+        callbacks.notifyCallbacks(this, fieldId, null)
     }
 
 }
