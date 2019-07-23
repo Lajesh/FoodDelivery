@@ -11,6 +11,5 @@ node("android"){
     stage("Build"){
       sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
     }
-  }
 
 }
