@@ -18,8 +18,7 @@ node{
     sh 'mkdir artifacts'
     sh 'mkdir report'
     sh 'mkdir report/test-results'
-     sh './gradlew lint'
-     # copy lint results
+    sh './gradlew lint'
      if [ ! -e "app/build/reports/lint-results.xml" ]; then
          echo "ERROR: File not exists: (app/build/reports/lint-results.xml)"
          exit 1
