@@ -20,4 +20,8 @@ node{
     sh 'cp app/build/reports/lint-results.xml report/'
     }
 
+    stage('Archive') {
+          archiveArtifacts 'app/build/outputs/apk/*'
+    }
+
 }
