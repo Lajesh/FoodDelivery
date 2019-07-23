@@ -13,9 +13,6 @@ node{
     }
 
     stage("Lint Analysis"){
-    sh 'rm -r artifacts/'
-    sh 'rm -r report/'
-    sh 'mkdir artifacts'
     sh 'mkdir report'
     sh 'mkdir report/test-results'
     sh './gradlew lint'
