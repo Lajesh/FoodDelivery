@@ -13,7 +13,7 @@ node{
     }
 
     stage("Lint Analysis"){
-    //sh 'rm -r report/'
+    sh 'rm -r report/'
     sh 'mkdir report'
     sh 'mkdir report/test-results'
     sh './gradlew lint'
