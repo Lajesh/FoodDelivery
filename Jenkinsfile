@@ -12,4 +12,8 @@ node{
       sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
     }
 
+    stage("Lint Analysis"){
+     sh './gradlew lint'
+    }
+
 }
