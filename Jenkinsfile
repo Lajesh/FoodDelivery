@@ -37,6 +37,7 @@ stages{
                                waitForQualityGate abortPipeline: true
             }
             }
+            }
 
 
 
