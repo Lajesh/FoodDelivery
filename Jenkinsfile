@@ -8,10 +8,6 @@ node{
     sh 'chmod +x ./gradlew'
   }
 
-    stage("Build"){
-      sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
-    }
-
     stage("Lint Analysis"){
         sh 'rm -r report/'
         sh 'mkdir report'
@@ -24,9 +20,20 @@ node{
         sh './gradlew testDevelopmentDebugUnitTest'
     }
 
+     stage("Build"){
+          sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
+        }
+
     stage('Archive') {
           archiveArtifacts 'app/build/outputs/apk/development/debug/*'
     }
+
+    post {
+        failure {
+          // Notify developer team of the failure
+          mail to: 'lajesh.dineshkumar@nagarro.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+        }
+      }
 
 
 
