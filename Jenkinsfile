@@ -29,7 +29,7 @@ stages{
 
      stage("Sonarqube Analysis"){
             steps{
-            withSonarQubeEnv('Sonarqube'){
+            withSonarQubeEnv(){
               sh './gradlew sonarqube' // builds app/build/outputs/apk/app-debug.apk
               }
               }
