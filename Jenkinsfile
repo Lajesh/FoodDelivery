@@ -3,7 +3,7 @@ pipeline{
 
   agent any
 
-stages{
+
   stage("Checkout"){
     checkout scm
   }
@@ -31,7 +31,7 @@ stages{
     stage('Archive') {
           archiveArtifacts 'app/build/outputs/apk/development/debug/*'
     }
-    }
+
 
     post {
         failure {
