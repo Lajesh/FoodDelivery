@@ -1,5 +1,9 @@
 
-node{
+pipeline{
+
+  agent any
+
+stages{
   stage("Checkout"){
     checkout scm
   }
@@ -26,6 +30,7 @@ node{
 
     stage('Archive') {
           archiveArtifacts 'app/build/outputs/apk/development/debug/*'
+    }
     }
 
     post {
