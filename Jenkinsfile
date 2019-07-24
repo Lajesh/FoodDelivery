@@ -20,8 +20,14 @@ node{
         sh 'cp app/build/reports/lint-results.xml report/'
     }
 
+    stage('Unit Test'){
+        sh './gradlew testDevelopmentDebugUnitTest'
+    }
+
     stage('Archive') {
           archiveArtifacts 'app/build/outputs/apk/development/debug/*'
     }
+
+
 
 }
