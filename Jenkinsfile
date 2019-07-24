@@ -51,11 +51,11 @@ stages{
     post {
         failure {
           // Notify developer team of the failure
-          mail to: 'lajesh.dineshkumar@nagarro.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+          mail to: 'lajesh.dineshkumar@nagarro.com', subject: 'Build Failed', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
         }
 
         success{
-            mail to: 'lajesh.dineshkumar@nagarro.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+            mail to: 'lajesh.dineshkumar@nagarro.com', subject: 'Build Succeeded!', body: "Build ${env.BUILD_NUMBER} Succeded; ${env.BUILD_URL}"
         }
       }
 
