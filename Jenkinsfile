@@ -42,8 +42,6 @@ pipeline {
         }
 
 
-
-
         stage("Build") {
             steps {
                 sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
