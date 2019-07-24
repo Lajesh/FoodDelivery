@@ -27,6 +27,12 @@ stages{
         }
     }
 
+     stage("Sonarqube Analysis"){
+            steps{
+              sh './gradlew sonarqube' // builds app/build/outputs/apk/app-debug.apk
+              }
+            }
+
      stage("Build"){
         steps{
           sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk

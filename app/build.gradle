@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "org.sonarqube"
+
 
 android {
     compileSdkVersion 28
@@ -43,6 +45,18 @@ android {
 
         production {
             dimension "server"
+        }
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.projectName", "Food Delivery App Android"
+            property "sonar.projectKey", "FDDA"
+            property "sonar.host.url", "http://localhost:9000"
+            property "sonar.language", "java"
+            property "sonar.sources", "src/main/"
+            property "sonar.login", "admin"
+            property "sonar.password", "admin"
         }
     }
 }
