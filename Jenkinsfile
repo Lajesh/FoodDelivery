@@ -53,6 +53,10 @@ stages{
           // Notify developer team of the failure
           mail to: 'lajesh.dineshkumar@nagarro.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
         }
+
+        success{
+            mail to: 'lajesh.dineshkumar@nagarro.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+        }
       }
 
 
