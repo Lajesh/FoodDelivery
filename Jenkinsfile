@@ -5,12 +5,6 @@ pipeline{
 
 
 stages{
-  stage("Checkout"){
-    steps{
-        checkout scm
-    }
-  }
-
   stage ("Prepare"){
     steps{
         sh 'chmod +x ./gradlew'
