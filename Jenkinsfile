@@ -16,7 +16,7 @@ stages{
   }
 
     stage("Lint Analysis"){
-       step{
+       steps{
         sh 'rm -r report/'
         sh 'mkdir report'
         sh 'mkdir report/test-results'
@@ -26,19 +26,19 @@ stages{
     }
 
     stage('Unit Test'){
-        step{
+        steps{
             sh './gradlew testDevelopmentDebugUnitTest'
         }
     }
 
      stage("Build"){
-        step{
+        steps{
           sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
           }
         }
 
     stage('Archive') {
-           step{
+           steps{
           archiveArtifacts 'app/build/outputs/apk/development/debug/*'
           }
     }
