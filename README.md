@@ -38,4 +38,5 @@ Open AndroidManifest.xml, add your google map key in the below section.
 ``` <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value=""/>
+                
                 ```
